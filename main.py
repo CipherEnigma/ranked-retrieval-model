@@ -1,5 +1,6 @@
 from corpus_parser import parse_corpus
 from preprocessing import preprocess
+from positional_index import build_positional_index, dump_positional_index
 
 
 # --------------------------------------------------
@@ -24,6 +25,16 @@ print("Number of documents:", len(documents))
 
 for document in documents:
     document.tokens = preprocess(document.text)
+
+
+# --------------------------------------------------
+# 3b. BUILD + DUMP POSITIONAL INDEX
+# --------------------------------------------------
+
+positional_index = build_positional_index(documents)
+dump_positional_index(positional_index, "data/positional_index.txt")
+
+print("\nVocabulary size:", len(positional_index))
 
 
 # --------------------------------------------------
