@@ -50,7 +50,11 @@ def explain_score(query, document, inverted_index, positional_index, N,
     base_score = sum(t["contribution"] for t in term_contributions)
 
     query_terms = preprocess(query)
-    boost = proximity_boost(query_terms, positional_index, document.docid)
+    boost = (
+        proximity_boost(query_terms, positional_index, document.docid)
+        if query_vector
+        else 0.0
+    )
 
     return {
         "doc_id": document.docid,
