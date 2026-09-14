@@ -1,6 +1,14 @@
 import string
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+
+# Deployed environments (e.g. Streamlit Cloud) start with no NLTK corpora
+# downloaded, so fetch the stopwords list on demand if it's missing.
+try:
+    stopwords.words("english")
+except LookupError:
+    nltk.download("stopwords")
 
 
 # Stopword policy: NLTK's standard English stopword list (~179 words e.g.
